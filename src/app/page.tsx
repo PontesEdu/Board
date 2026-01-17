@@ -1,6 +1,7 @@
+import { Button } from "@/components/button";
 import { Card } from "@/components/card";
 import { Section } from "@/components/section";
-import { ArchiveIcon, ThumbsUpIcon } from "lucide-react";
+import { ArchiveIcon, MessageCircleCodeIcon, ThumbsUpIcon } from "lucide-react";
 
 export default function Home() {
   return (
@@ -27,10 +28,15 @@ export default function Home() {
                 <Card.Number>ECO-001</Card.Number>
               </Card.Header>
               <Card.Footer>
-                <button type="button" className="text-navy-100 flex items-center gap-2 rounded-lg px-2.5 py-1 bg-navy-600 cursor-pointer">
+                <Button type="button">
                   <ThumbsUpIcon className="size-3"/>
                   <span className="text-sm">12</span>
-                </button>
+                </Button>
+
+                <Button type="button">
+                  <MessageCircleCodeIcon className="size-3"/>
+                  <span className="text-sm">6</span>
+                </Button>
               </Card.Footer>
             </Card.Root>
           </Section.Content>
