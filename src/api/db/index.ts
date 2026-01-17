@@ -1,7 +1,7 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import * as schema from "./schema";
-import { apiEnv } from "../api-env";
+import { apiEnv } from "../../api-env";
 
 const client = postgres(apiEnv  .DATABASE_URL);
 
