@@ -1,5 +1,6 @@
+import { Card } from "@/components/card";
 import { Section } from "@/components/section";
-import { ArchiveIcon } from "lucide-react";
+import { ArchiveIcon, ThumbsUpIcon } from "lucide-react";
 
 export default function Home() {
   return (
@@ -20,9 +21,18 @@ export default function Home() {
 
           {/* Content */}
           <Section.Content className="flex flex-col gap-2.5 overflow-y-scroll p-3">
-            <div>card 1</div>
-            <div>card 2</div>
-            <div>card 3</div>
+            <Card.Root>
+              <Card.Header>
+                <Card.Title>Implementar cartão de credito</Card.Title>
+                <Card.Number>ECO-001</Card.Number>
+              </Card.Header>
+              <Card.Footer>
+                <button type="button" className="text-navy-100 flex items-center gap-2 rounded-lg px-2.5 py-1 bg-navy-600 cursor-pointer">
+                  <ThumbsUpIcon className="size-3"/>
+                  <span className="text-sm">12</span>
+                </button>
+              </Card.Footer>
+            </Card.Root>
           </Section.Content>
         </Section.Root>
       </main>
