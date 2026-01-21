@@ -31,11 +31,11 @@ export function UserButton () {
           onClick={handleSignOut}
           className="size-8 rounded-full overflow-hidden cursor-pointer border-2 border-transparent hover:border-navy-200 transition-colors duration-150"
         >
-          {/* <img
+          <img
             src={session.user.image ?? ""}
             alt={session.user.name}
             className="size-8 rounded-full"
-          /> */}
+          />
         </button>
       ) : (
         <button

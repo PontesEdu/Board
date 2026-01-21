@@ -1,6 +1,7 @@
 import { Button } from "@/components/button";
 import { Card } from "@/components/card";
 import { Section } from "@/components/section";
+import { listIssues } from "@/http/list-issues";
 import { ArchiveIcon, MessageCircleCodeIcon, ThumbsUpIcon } from "lucide-react";
 import { Metadata } from "next";
 
@@ -16,45 +17,162 @@ interface BoardProps {
 
 export default async function Home({searchParams}: BoardProps) {
 
-  const { q } = await searchParams
+  const { q } = await searchParams  
+
+  const issues = await listIssues()
   return (
-    <div className="max-w-405 w-full mx-auto p-10 flex flex-col gap-8 h-dvh">
-      <div></div>
+    <main className="grid grid-cols-4 gap-5 flex-1 items-stretch">
+      <Section.Root>
+        {/* Header */}
+        <Section.Header >
+          <Section.Title >
+            <ArchiveIcon/>
+            Backlog
+          </Section.Title>
 
-      <main className="grid grid-cols-4 gap-5 flex-1 items-stretch">
-        <Section.Root>
-          {/* Header */}
-          <Section.Header className="flex items-center justify-between px-3">
-            <Section.Title className="bg-navy-700 rounded-lg px-3 py-1.5 flex items-center gap-2 text-xs">
-              <ArchiveIcon className="size-3" />
-              Backlog
-            </Section.Title>
+          <Section.IssueCount>{issues.backlog.length}</Section.IssueCount>
+        </Section.Header>
 
-            <Section.IssueCount className="text-xs text-navy-200">16</Section.IssueCount>
-          </Section.Header>
+        {/* Content */}
+        <Section.Content >
+          {issues.backlog.map(issues => {
+            return (
+              <Card.Root key={issues.id}>
+                <Card.Header>
+                  <Card.Number>{issues.issueNumber}</Card.Number>
+                  <Card.Title>{issues.title}</Card.Title>
+                </Card.Header>
+                <Card.Footer>
+                  <Button type="button">
+                    <ThumbsUpIcon className="size-3"/>
+                    <span className="text-sm">12</span>
+                  </Button>
 
-          {/* Content */}
-          <Section.Content className="flex flex-col gap-2.5 overflow-y-scroll p-3">
-            <Card.Root>
-              <Card.Header>
-                <Card.Title>Implementar cartão de credito</Card.Title>
-                <Card.Number>ECO-001</Card.Number>
-              </Card.Header>
-              <Card.Footer>
-                <Button type="button">
-                  <ThumbsUpIcon className="size-3"/>
-                  <span className="text-sm">12</span>
-                </Button>
+                  <Button type="button">
+                    <MessageCircleCodeIcon className="size-3"/>
+                    <span className="text-sm">6</span>
+                  </Button>
+                </Card.Footer>
+              </Card.Root>
+            )
+          })}
+        </Section.Content>
+      </Section.Root>
 
-                <Button type="button">
-                  <MessageCircleCodeIcon className="size-3"/>
-                  <span className="text-sm">6</span>
-                </Button>
-              </Card.Footer>
-            </Card.Root>
-          </Section.Content>
-        </Section.Root>
-      </main>
-    </div>
+
+      {/* To-do */}
+      <Section.Root>
+        {/* Header */}
+        <Section.Header >
+          <Section.Title >
+            <ArchiveIcon/>
+            To-do
+          </Section.Title>
+
+          <Section.IssueCount>{issues.todo.length}</Section.IssueCount>
+        </Section.Header>
+
+        {/* Content */}
+        <Section.Content >
+          {issues.todo.map(issues => {
+            return (
+              <Card.Root key={issues.id}>
+                <Card.Header>
+                  <Card.Number>{issues.issueNumber}</Card.Number>
+                  <Card.Title>{issues.title}</Card.Title>
+                </Card.Header>
+                <Card.Footer>
+                  <Button type="button">
+                    <ThumbsUpIcon className="size-3"/>
+                    <span className="text-sm">12</span>
+                  </Button>
+
+                  <Button type="button">
+                    <MessageCircleCodeIcon className="size-3"/>
+                    <span className="text-sm">6</span>
+                  </Button>
+                </Card.Footer>
+              </Card.Root>
+            )
+          })}
+        </Section.Content>
+      </Section.Root>
+
+
+      <Section.Root>
+        {/* Header */}
+        <Section.Header >
+          <Section.Title >
+            <ArchiveIcon/>
+            In progress
+          </Section.Title>
+
+          <Section.IssueCount>{issues.in_progress.length}</Section.IssueCount>
+        </Section.Header>
+
+        {/* Content */}
+        <Section.Content >
+          {issues.in_progress.map(issues => {
+            return (
+              <Card.Root key={issues.id}>
+                <Card.Header>
+                  <Card.Number>{issues.issueNumber}</Card.Number>
+                  <Card.Title>{issues.title}</Card.Title>
+                </Card.Header>
+                <Card.Footer>
+                  <Button type="button">
+                    <ThumbsUpIcon className="size-3"/>
+                    <span className="text-sm">12</span>
+                  </Button>
+
+                  <Button type="button">
+                    <MessageCircleCodeIcon className="size-3"/>
+                    <span className="text-sm">6</span>
+                  </Button>
+                </Card.Footer>
+              </Card.Root>
+            )
+          })}
+        </Section.Content>
+      </Section.Root>
+
+
+      <Section.Root>
+        {/* Header */}
+        <Section.Header >
+          <Section.Title >
+            <ArchiveIcon/>
+            Done
+          </Section.Title>
+
+          <Section.IssueCount>{issues.done.length}</Section.IssueCount>
+        </Section.Header>
+
+        {/* Content */}
+        <Section.Content >
+          {issues.done.map(issues => {
+            return (
+              <Card.Root key={issues.id}>
+                <Card.Header>
+                  <Card.Number>{issues.issueNumber}</Card.Number>
+                  <Card.Title>{issues.title}</Card.Title>
+                </Card.Header>
+                <Card.Footer>
+                  <Button type="button">
+                    <ThumbsUpIcon className="size-3"/>
+                    <span className="text-sm">12</span>
+                  </Button>
+
+                  <Button type="button">
+                    <MessageCircleCodeIcon className="size-3"/>
+                    <span className="text-sm">6</span>
+                  </Button>
+                </Card.Footer>
+              </Card.Root>
+            )
+          })}
+        </Section.Content>
+      </Section.Root>
+    </main>
   );
 }

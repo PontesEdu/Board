@@ -25,7 +25,7 @@ export function SearchInput() {
       <Input
         type="text"
         placeholder="Search for features..."
-        className="w-68 pl-8"
+        className="w-80 pl-10"
         value={search}
         onChange={handleSearchUpdate}
       />
