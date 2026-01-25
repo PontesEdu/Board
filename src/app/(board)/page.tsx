@@ -17,9 +17,10 @@ interface BoardProps {
 
 export default async function Home({searchParams}: BoardProps) {
 
-  const { q } = await searchParams  
+  const { q } = await searchParams
 
-  const issues = await listIssues()
+  const issues = await listIssues({ search: q })
+
   return (
     <main className="grid grid-cols-4 gap-5 flex-1 items-stretch">
       <Section.Root>
@@ -35,27 +36,35 @@ export default async function Home({searchParams}: BoardProps) {
 
         {/* Content */}
         <Section.Content >
-          {issues.backlog.map(issues => {
-            return (
-              <Card.Root key={issues.id}>
-                <Card.Header>
-                  <Card.Number>{issues.issueNumber}</Card.Number>
-                  <Card.Title>{issues.title}</Card.Title>
-                </Card.Header>
-                <Card.Footer>
-                  <Button type="button">
-                    <ThumbsUpIcon className="size-3"/>
-                    <span className="text-sm">12</span>
-                  </Button>
+          {issues.backlog.length === 0 ? (
+            <div className="flex items-center justify-center py-8 text-center">
+              <p className="text-sm text-navy-300">
+                No issues matching your filters
+              </p>
+            </div>
+          ) : (
+            issues.backlog.map(issues => {
+              return (
+                <Card.Root key={issues.id}>
+                  <Card.Header>
+                    <Card.Number>{issues.issueNumber}</Card.Number>
+                    <Card.Title>{issues.title}</Card.Title>
+                  </Card.Header>
+                  <Card.Footer>
+                    <Button type="button">
+                      <ThumbsUpIcon className="size-3"/>
+                      <span className="text-sm">12</span>
+                    </Button>
 
-                  <Button type="button">
-                    <MessageCircleCodeIcon className="size-3"/>
-                    <span className="text-sm">6</span>
-                  </Button>
-                </Card.Footer>
-              </Card.Root>
-            )
-          })}
+                    <Button type="button">
+                      <MessageCircleCodeIcon className="size-3"/>
+                      <span className="text-sm">6</span>
+                    </Button>
+                  </Card.Footer>
+                </Card.Root>
+              )
+            })
+          )}
         </Section.Content>
       </Section.Root>
 
@@ -74,27 +83,35 @@ export default async function Home({searchParams}: BoardProps) {
 
         {/* Content */}
         <Section.Content >
-          {issues.todo.map(issues => {
-            return (
-              <Card.Root key={issues.id}>
-                <Card.Header>
-                  <Card.Number>{issues.issueNumber}</Card.Number>
-                  <Card.Title>{issues.title}</Card.Title>
-                </Card.Header>
-                <Card.Footer>
-                  <Button type="button">
-                    <ThumbsUpIcon className="size-3"/>
-                    <span className="text-sm">12</span>
-                  </Button>
+          { issues.todo.length === 0 ? (
+            <div className="flex items-center justify-center py-8 text-center">
+              <p className="text-sm text-navy-300">
+                No issues matching your filters
+              </p>
+            </div>
+          ) : ( 
+            issues.todo.map(issues => {
+              return (
+                <Card.Root key={issues.id}>
+                  <Card.Header>
+                    <Card.Number>{issues.issueNumber}</Card.Number>
+                    <Card.Title>{issues.title}</Card.Title>
+                  </Card.Header>
+                  <Card.Footer>
+                    <Button type="button">
+                      <ThumbsUpIcon className="size-3"/>
+                      <span className="text-sm">12</span>
+                    </Button>
 
-                  <Button type="button">
-                    <MessageCircleCodeIcon className="size-3"/>
-                    <span className="text-sm">6</span>
-                  </Button>
-                </Card.Footer>
-              </Card.Root>
-            )
-          })}
+                    <Button type="button">
+                      <MessageCircleCodeIcon className="size-3"/>
+                      <span className="text-sm">6</span>
+                    </Button>
+                  </Card.Footer>
+                </Card.Root>
+              )
+            })
+          )}
         </Section.Content>
       </Section.Root>
 
@@ -112,7 +129,13 @@ export default async function Home({searchParams}: BoardProps) {
 
         {/* Content */}
         <Section.Content >
-          {issues.in_progress.map(issues => {
+          {issues.in_progress.length === 0 ? (
+            <div className="flex items-center justify-center py-8 text-center">
+              <p className="text-sm text-navy-300">
+                No issues matching your filters
+              </p>
+            </div>
+          ) : ( issues.in_progress.map(issues => {
             return (
               <Card.Root key={issues.id}>
                 <Card.Header>
@@ -132,7 +155,7 @@ export default async function Home({searchParams}: BoardProps) {
                 </Card.Footer>
               </Card.Root>
             )
-          })}
+          }))}
         </Section.Content>
       </Section.Root>
 
@@ -150,7 +173,13 @@ export default async function Home({searchParams}: BoardProps) {
 
         {/* Content */}
         <Section.Content >
-          {issues.done.map(issues => {
+          {issues.done.length === 0 ? (
+            <div className="flex items-center justify-center py-8 text-center">
+              <p className="text-sm text-navy-300">
+                No issues matching your filters
+              </p>
+            </div>
+          ) : (issues.done.map(issues => {
             return (
               <Card.Root key={issues.id}>
                 <Card.Header>
@@ -170,7 +199,7 @@ export default async function Home({searchParams}: BoardProps) {
                 </Card.Footer>
               </Card.Root>
             )
-          })}
+          }))}
         </Section.Content>
       </Section.Root>
     </main>
